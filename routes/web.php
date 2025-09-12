@@ -29,6 +29,7 @@ Route::get('/', function () {
 Route::resource('/posts', PostController::class)->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'formLogin'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 
 

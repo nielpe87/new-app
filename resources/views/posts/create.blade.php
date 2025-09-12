@@ -1,22 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <form action="{{ route("posts.store") }}" method="post">
-        @csrf
-        <label for="">Titulo:</label>
-        <input type="text" name="title">
-        <br>
-        <label for="">Descrição</label>
-        <input type="text" name="description">
-        <br>
-        <button type="submit">Salvar</button>
+@extends('app')
 
-    </form>
-</body>
-</html>
+@section('css')
+<style>
+
+    .titulo {
+        color: red;
+    }
+</style>
+@endsection
+
+@section('content')
+<h1 class="titulo">Criar Post</h1>
+<form action="{{ route("posts.store") }}" method="post">
+    @csrf
+    <div class="group m-3">
+        <label for="">Titulo:</label>
+        <input type="text" class="form-control" name="title">
+    </div>
+    <div class="group m-3">
+        <label for="">Descrição</label>
+        <input type="text" class="form-control" name="description">
+    </div>
+
+    <button class="btn btn-primary" type="submit">Salvar</button>
+
+</form>
+@endsection

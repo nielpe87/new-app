@@ -10,32 +10,40 @@
 </head>
 <body>
     <div class="container">
+        <div class="d-flex justify-content-center">
 
+            <div class="card col-md-4 mt-4">
+                <div class="card-header">
+                    <h4>Login</h4>
+                </div>
+                <form action="{{ route('authenticate') }}" method="post">
+                    <div class="card-body">
 
-        <form action="{{ route('authenticate') }}" method="post">
-            @csrf()
-            <div class="group m-3">
-                <label for="">Email</label>
-                <input type="email" name="email" class="form-control">
-                 <div>
-                    @error('email')
-                        {{$message}}
-                    @enderror
+                        @csrf()
+                        <div class="group m-3">
+                            <label for="">Email</label>
+                            <input type="email" name="email" class="form-control">
+                            <div>
+                                @error('email')
+                                    {{$message}}
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="group m-3">
+                            <label for="">Senha</label>
+                            <input type="password" name="password" class="form-control">
+                            @error('password')
+                                    {{$message}}
+                                @enderror
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
         </div>
-            </div>
-            <div class="group m-3">
-                <label for="">Senha</label>
-                <input type="password" name="password" class="form-control">
-                 @error('password')
-                        {{$message}}
-                    @enderror
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
 </body>
 </html>
