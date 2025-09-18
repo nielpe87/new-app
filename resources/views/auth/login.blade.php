@@ -13,7 +13,7 @@
         <div class="d-flex justify-content-center">
 
             <div class="card col-md-4 mt-4">
-                <div class="card-header">
+                <div class="card-header text-center">
                     <h4>Login</h4>
                 </div>
                 <form action="{{ route('authenticate') }}" method="post">
@@ -22,10 +22,10 @@
                         @csrf()
                         <div class="group m-3">
                             <label for="">Email</label>
-                            <input type="email" name="email" class="form-control">
+                            <input type="email" name="email" class="form-control" value="{{ old('email') }}">
                             <div>
                                 @error('email')
-                                    {{$message}}
+                                    <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                         </div>
@@ -33,8 +33,8 @@
                             <label for="">Senha</label>
                             <input type="password" name="password" class="form-control">
                             @error('password')
-                                    {{$message}}
-                                @enderror
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="card-footer">

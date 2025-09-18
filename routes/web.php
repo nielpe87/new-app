@@ -26,6 +26,10 @@ Route::get('/', function () {
 //     });
 // });
 
+Route::get('/user', function(){
+    echo "rota web /user";
+});
+
 Route::resource('/posts', PostController::class)->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'formLogin'])->name('login');

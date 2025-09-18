@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -23,7 +24,26 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $post = new Post;
+
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->save();
+
+            return response()->json($post, 201);
+        } catch (\Throwable $th) {
+
+            Log::error('Error creating post: ' . $th->getMessage());
+             $data = [
+                'error' => true,
+                'message' => 'Post not found',
+                'status' => 500,
+                'code' => 1398
+            ];
+
+            return response()->json($data, 500);
+        }
     }
 
     /**
@@ -31,7 +51,20 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $post = Post::findOrFail($id);
+            return response()->json($post);
+
+        } catch (\Throwable $th) {
+            $data = [
+                'error' => true,
+                'message' => 'Post not found',
+                'status' => 404,
+                'code' => 1092
+            ];
+
+            return response()->json($data, 404);
+        }
     }
 
     /**
@@ -39,7 +72,24 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $post = Post::findOrFail($id);
+
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->update();
+
+            return response()->json($post);
+        } catch (\Throwable $th) {
+            $data = [
+                'error' => true,
+                'message' => 'Post not updeted',
+                'status' => 500,
+                'code' => 109232
+            ];
+
+            return response()->json($data, 500);
+        }
     }
 
     /**
@@ -47,6 +97,21 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Post::find($id)->delete();
+
+            return response()->json([
+                'message' => 'Post excluido'
+            ]);
+        } catch (\Throwable $th) {
+             $data = [
+                'error' => true,
+                'message' => 'Post not deleted',
+                'status' => 500,
+                'code' => 323232
+            ];
+
+            return response()->json($data, 500);
+        }
     }
 }
